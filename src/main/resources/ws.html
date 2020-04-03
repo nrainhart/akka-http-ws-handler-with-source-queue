@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+      const ws = new WebSocket('ws://localhost:3030/ws');
+
+      ws.onopen = () => {
+        console.log('connected');
+
+        ws.onmessage = console.log;
+
+        const interval = setInterval(() => ws.send('asd'), 1000);
+
+        ws.onclose = () => {
+          clearInterval(interval);
+          console.log('socket closed');
+        };
+      };
+
+      ws.onerror = console.error;
+
+    </script>
+</head>
+
+<body>
+
+</body>
+</html>
